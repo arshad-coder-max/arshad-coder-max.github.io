@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All Handloom Products – Tantushala</title>
+<meta name="description" content="Browse our full collection of authentic handloom products — sarees, dupattas, stoles, rugs, and home décor from India's finest weavers.">
+<link rel="stylesheet" href="style.css">
+<style>
+.cat-filter-btn {
+  padding: 8px 18px; border-radius: 50px;
+  border: 1.5px solid #ddd; background: none;
+  font-size: 0.88rem; font-weight: 600; cursor: pointer;
+  transition: all 0.25s; color: var(--text-muted);
+}
+.cat-filter-btn:hover, .cat-filter-btn.active {
+  background: var(--deep-maroon); border-color: var(--deep-maroon); color: white;
+}
+.cat-filters { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.search-bar {
+  display: flex; align-items: center; gap: 10px;
+  background: white; border: 1.5px solid #ddd; border-radius: 10px;
+  padding: 10px 14px; margin-bottom: 1.5rem;
+}
+.search-bar input { border: none; outline: none; flex: 1; font-size: 0.9rem; font-family: 'Inter', sans-serif; }
+.clear-filters-btn {
+  width: 100%; padding: 10px; background: none; border: 1.5px solid #eee;
+  border-radius: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-muted);
+  transition: all 0.2s;
+}
+.clear-filters-btn:hover { border-color: var(--saffron); color: var(--saffron); }
+</style>
+</head>
+<body data-page="products">
+
+<nav class="navbar">
+  <div class="logo">🪡 <span>Tantu</span>shala</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Shop</a></li>
+    <li><a href="products.html?cat=sarees">Sarees</a></li>
+    <li><a href="products.html?cat=home-decor">Home Décor</a></li>
+    <li><a href="products.html?cat=stoles">Stoles & Dupattas</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" title="Cart" onclick="window.location='cart.html'" style="position:relative" id="nav-cart-btn">
+      🛒 <span class="cart-badge"></span>
+    </button>
+    <button class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="products.html">Shop All</a>
+  <a href="products.html?cat=sarees">Sarees</a>
+  <a href="products.html?cat=home-decor">Home Décor</a>
+  <a href="cart.html">Cart 🛒</a>
+</div>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> / <span>Shop All</span></div>
+  <h1>Our Handloom Collection</h1>
+  <p>Authentic weaves from India's finest artisans — filter, explore and discover your piece.</p>
+</div>
+
+<div class="products-page-layout">
+  <!-- SIDEBAR -->
+  <aside class="filters-sidebar">
+    <div class="filter-group">
+      <h4>Price Range</h4>
+      <input type="range" id="price-range" min="500" max="20000" value="20000" step="100">
+      <div class="price-labels"><span>₹500</span><span id="price-max-label">₹20,000</span></div>
+    </div>
+    <div class="filter-group">
+      <h4>Craft Type</h4>
+      <div class="filter-option"><input type="checkbox" class="craft-filter" id="cf-kanjivaram" value="Kanjivaram"><label for="cf-kanjivaram">Kanjivaram</label></div>
+      <div class="filter-option"><input type="checkbox" class="craft-filter" id="cf-banarasi" value="Banarasi"><label for="cf-banarasi">Banarasi</label></div>
+      <div class="filter-option"><input type="checkbox" class="craft-filter" id="cf-chanderi" value="Chanderi"><label for="cf-chanderi">Chanderi</label></div>
+      <div class="filter-option"><input type="checkbox" class="craft-filter" id="cf-ikat" value="Ikat Weave"><label for="cf-ikat">Ikat</label></div>
+      <div class="filter-option"><input type="checkbox" class="craft-filter" id="cf-pashmina" value="Pashmina"><label for="cf-pashmina">Pashmina</label></div>
+      <div class="filter-option"><input type="checkbox" class="craft-filter" id="cf-jamdani" value="Jamdani"><label for="cf-jamdani">Jamdani</label></div>
+      <div class="filter-option"><input type="checkbox" class="craft-filter" id="cf-phulkari" value="Phulkari"><label for="cf-phulkari">Phulkari</label></div>
+    </div>
+    <div class="filter-group">
+      <h4>Rating</h4>
+      <div class="filter-option"><input type="checkbox" id="r5"><label for="r5">⭐⭐⭐⭐⭐ (5 star)</label></div>
+      <div class="filter-option"><input type="checkbox" id="r4"><label for="r4">⭐⭐⭐⭐ (4+ star)</label></div>
+    </div>
+    <button class="clear-filters-btn" onclick="clearFilters()" id="clear-filters-btn">✕ Clear All Filters</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="products-main">
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" id="product-search" placeholder="Search sarees, dupattas, crafts...">
+    </div>
+    <div class="cat-filters">
+      <button class="cat-filter-btn active" data-cat="all" id="cat-all">All</button>
+      <button class="cat-filter-btn" data-cat="sarees" id="cat-sarees">Sarees</button>
+      <button class="cat-filter-btn" data-cat="dupattas" id="cat-dupattas">Dupattas</button>
+      <button class="cat-filter-btn" data-cat="stoles" id="cat-stoles">Stoles</button>
+      <button class="cat-filter-btn" data-cat="home-decor" id="cat-home-decor">Home Décor</button>
+    </div>
+    <div class="products-toolbar">
+      <span class="results-count" id="results-count">Showing 8 products</span>
+      <select class="sort-select" id="sort-select">
+        <option value="default">Sort: Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+        <option value="newest">Newest First</option>
+      </select>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-logo">🪡 Tantushala</div><p class="footer-about">India's premium destination for authentic handloom textiles.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="products.html">All Products</a></li><li><a href="products.html?cat=sarees">Sarees</a></li><li><a href="products.html?cat=home-decor">Home Décor</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Shipping Info</a></li><li><a href="#">Returns</a></li><li><a href="#">Size Guide</a></li></ul></div>
+    <div class="footer-col"><h4>About</h4><ul><li><a href="#">Our Story</a></li><li><a href="#">Weavers</a></li><li><a href="#">Sustainability</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2024 Tantushala. All rights reserved. 🇮🇳</p></div>
+</footer>
+
+<style>@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }</style>
+<script src="app.js"></script>
+<script>
+function clearFilters() {
+  document.querySelectorAll('.craft-filter').forEach(cb => cb.checked = false);
+  document.getElementById('price-range').value = 20000;
+  document.getElementById('price-max-label').textContent = '₹20,000';
+  document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-all').classList.add('active');
+  activeCategory = 'all';
+  document.getElementById('product-search').value = '';
+  applyFilters();
+}
+// Apply URL category param on load
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('cat');
+  if (cat) {
+    setTimeout(() => {
+      const btn = document.querySelector(`.cat-filter-btn[data-cat="${cat}"]`);
+      if (btn) { btn.click(); }
+    }, 50);
+  }
+});
+</script>
+</body>
+</html>

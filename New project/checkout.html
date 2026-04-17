@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout – Tantushala</title>
+<meta name="description" content="Complete your handloom purchase securely at Tantushala.">
+<link rel="stylesheet" href="style.css">
+<style>
+.step-indicator { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 2.5rem; }
+.step { display: flex; align-items: center; gap: 8px; }
+.step-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+.step.active .step-circle { background: var(--deep-maroon); color: white; }
+.step.done .step-circle { background: #27ae60; color: white; }
+.step.pending .step-circle { background: #eee; color: var(--text-muted); }
+.step-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+.step.active .step-label { color: var(--deep-maroon); }
+.step-line { width: 60px; height: 2px; background: #eee; margin: 0 4px; }
+.step-line.done { background: #27ae60; }
+</style>
+</head>
+<body data-page="checkout">
+
+<nav class="navbar">
+  <div class="logo">🪡 <span>Tantu</span>shala</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Shop</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" onclick="window.location='cart.html'" style="position:relative" id="nav-cart-btn">
+      🛒 <span class="cart-badge"></span>
+    </button>
+  </div>
+</nav>
+
+<main class="checkout-page">
+  <div class="step-indicator">
+    <div class="step done"><div class="step-circle">✓</div><div class="step-label">Cart</div></div>
+    <div class="step-line done"></div>
+    <div class="step active"><div class="step-circle">2</div><div class="step-label">Checkout</div></div>
+    <div class="step-line"></div>
+    <div class="step pending"><div class="step-circle">3</div><div class="step-label">Confirmation</div></div>
+  </div>
+
+  <form id="checkout-form">
+  <div class="checkout-layout">
+    <!-- LEFT: FORM -->
+    <div>
+      <!-- Delivery Address -->
+      <div class="checkout-form-section" style="margin-bottom:1.5rem">
+        <h2>📦 Delivery Address</h2>
+        <div class="form-grid">
+          <div class="form-group"><label for="co-fname">First Name</label><input type="text" id="co-fname" placeholder="Priya" required></div>
+          <div class="form-group"><label for="co-lname">Last Name</label><input type="text" id="co-lname" placeholder="Sharma" required></div>
+          <div class="form-group full"><label for="co-email">Email Address</label><input type="email" id="co-email" placeholder="priya@example.com" required></div>
+          <div class="form-group full"><label for="co-phone">Phone Number</label><input type="tel" id="co-phone" placeholder="+91 98765 43210" required></div>
+          <div class="form-group full"><label for="co-address">Street Address</label><input type="text" id="co-address" placeholder="House no, Street, Area" required></div>
+          <div class="form-group"><label for="co-city">City</label><input type="text" id="co-city" placeholder="Chennai" required></div>
+          <div class="form-group"><label for="co-state">State</label>
+            <select id="co-state" required>
+              <option value="">Select State</option>
+              <option>Andhra Pradesh</option><option>Delhi</option><option>Gujarat</option>
+              <option>Karnataka</option><option>Kerala</option><option>Maharashtra</option>
+              <option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option>
+              <option>Telangana</option><option>Uttar Pradesh</option><option>West Bengal</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="co-pin">PIN Code</label><input type="text" id="co-pin" placeholder="600001" maxlength="6" required></div>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="checkout-form-section">
+        <h2>💳 Payment Method</h2>
+        <div class="payment-methods">
+          <div class="payment-option selected" id="pay-upi">
+            <input type="radio" name="payment" id="r-upi" value="upi" checked>
+            <label for="r-upi">📱 UPI / Google Pay / PhonePe</label>
+          </div>
+          <div class="payment-option" id="pay-card">
+            <input type="radio" name="payment" id="r-card" value="card">
+            <label for="r-card">💳 Credit / Debit Card</label>
+          </div>
+          <div class="payment-option" id="pay-netbanking">
+            <input type="radio" name="payment" id="r-netbanking" value="netbanking">
+            <label for="r-netbanking">🏦 Net Banking</label>
+          </div>
+          <div class="payment-option" id="pay-cod">
+            <input type="radio" name="payment" id="r-cod" value="cod">
+            <label for="r-cod">💵 Cash on Delivery</label>
+          </div>
+        </div>
+
+        <div id="upi-detail" style="background:#f9f5ee;border-radius:10px;padding:1rem;font-size:0.88rem;color:var(--text-muted)">
+          Enter your UPI ID or scan QR at the next step after order placement.
+        </div>
+
+        <div style="margin-top:1.5rem;background:var(--light-gold);border-radius:10px;padding:1rem;font-size:0.82rem;color:var(--text-muted)">
+          🔒 Your payment information is encrypted and secure. We never store card data.
+        </div>
+
+        <button type="submit" class="checkout-btn" id="place-order-btn" style="margin-top:1.5rem">
+          🎉 Place Order Securely →
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: ORDER SUMMARY -->
+    <aside class="order-summary-panel">
+      <h3 style="font-size:1.1rem;color:var(--deep-maroon);margin-bottom:1.5rem">Order Summary</h3>
+      <div id="mini-cart-items"></div>
+      <div style="border-top:1.5px solid #eee;margin-top:1rem;padding-top:1rem">
+        <div class="summary-row"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+        <div class="summary-row"><span>Discount (5%)</span><span id="co-discount" style="color:#27ae60">−₹0</span></div>
+        <div class="summary-row"><span>Shipping</span><span id="co-shipping">₹0</span></div>
+        <div class="summary-row total" style="margin-top:0.8rem"><span>Total</span><span id="co-total">₹0</span></div>
+      </div>
+      <div style="margin-top:1.5rem;background:var(--cream);border-radius:10px;padding:1rem">
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark);margin-bottom:0.5rem">✅ You're getting:</div>
+        <ul style="list-style:none;font-size:0.8rem;color:var(--text-muted)">
+          <li style="padding:4px 0">🏅 GI Tagged authenticity</li>
+          <li style="padding:4px 0">📜 Weaver Certificate included</li>
+          <li style="padding:4px 0">🔄 15-day free returns</li>
+          <li style="padding:4px 0">🌿 Eco-friendly packaging</li>
+          <li style="padding:4px 0">🚚 Tracked delivery</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  </form>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-logo">🪡 Tantushala</div><p class="footer-about">India's premium destination for authentic handloom textiles.</p></div>
+    <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Shipping Info</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact Us</a></li></ul></div>
+    <div class="footer-col"><h4>Security</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="#">SSL Secured</a></li></ul></div>
+    <div class="footer-col"><h4>About</h4><ul><li><a href="#">Our Story</a></li><li><a href="#">Weavers</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2024 Tantushala. All rights reserved. 🇮🇳</p></div>
+</footer>
+
+<style>@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }</style>
+<script src="app.js"></script>
+</body>
+</html>

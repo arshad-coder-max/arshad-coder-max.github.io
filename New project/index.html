@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tantushala – Premium Handloom Products | India's Finest Weaves</title>
+<meta name="description" content="Discover authentic Indian handloom sarees, dupattas, home décor and more. Directly from master weavers to your doorstep. Shop Kanjivaram, Banarasi, Chanderi, Ikat and more.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">🪡 <span>Tantu</span>shala</div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="products.html">Shop</a></li>
+    <li><a href="products.html?cat=sarees">Sarees</a></li>
+    <li><a href="products.html?cat=home-decor">Home Décor</a></li>
+    <li><a href="products.html?cat=stoles">Stoles & Dupattas</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" onclick="window.location='products.html'" title="Search" id="nav-search-btn">🔍</button>
+    <button class="nav-icon-btn" onclick="window.location='cart.html'" title="Cart" id="nav-cart-btn" style="position:relative">
+      🛒 <span class="cart-badge"></span>
+    </button>
+    <button class="btn-primary" onclick="window.location='products.html'" id="nav-shop-btn">Shop Now</button>
+    <button class="hamburger" aria-label="Menu" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="products.html">Shop All</a>
+  <a href="products.html?cat=sarees">Sarees</a>
+  <a href="products.html?cat=home-decor">Home Décor</a>
+  <a href="cart.html">Cart 🛒</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Authentic Indian Handloom</div>
+    <h1>Woven with <em>Soul,</em><br>Crafted with <em>Tradition</em></h1>
+    <p>Discover museum-quality handloom textiles crafted by India's master weavers. From silk Kanjivarams to Pashmina stoles — every thread tells a story.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="window.location='products.html'" id="hero-shop-btn" style="padding:14px 32px;font-size:1rem;">Explore Collection</button>
+      <button class="btn-outline" onclick="document.getElementById('weaver-section').scrollIntoView({behavior:'smooth'})" id="hero-story-btn" style="padding:14px 32px;font-size:1rem;border-color:rgba(255,255,255,0.5);color:white;">Our Weavers</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Artisan Weavers</div></div>
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Craft Traditions</div></div>
+    <div class="stat"><div class="stat-num">15K+</div><div class="stat-label">Happy Customers</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Handmade</div></div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item"><span>🚚</span><span>Free Shipping above ₹5000</span></div>
+  <div class="trust-item"><span>🔄</span><span>Easy 15-Day Returns</span></div>
+  <div class="trust-item"><span>🏅</span><span>GI Tagged Authenticity</span></div>
+  <div class="trust-item"><span>💳</span><span>Secure Payments</span></div>
+  <div class="trust-item"><span>🌿</span><span>Eco-Friendly Packaging</span></div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="section-header">
+    <div class="section-tag">Browse by Category</div>
+    <h2>What Are You Looking For?</h2>
+    <p>From heirloom sarees to artisanal home décor — explore India's most beloved handwoven craft traditions.</p>
+  </div>
+  <div class="categories-grid">
+    <div class="category-card" onclick="window.location='products.html?cat=sarees'" id="cat-sarees">
+      <img src="images/saree.png" alt="Sarees">
+      <div class="category-overlay"></div>
+      <div class="category-info"><h3>Sarees</h3><span>Kanjivaram · Banarasi · Chanderi · Jamdani</span></div>
+    </div>
+    <div class="category-card" onclick="window.location='products.html?cat=dupattas'" id="cat-dupattas">
+      <img src="images/dupatta.png" alt="Dupattas">
+      <div class="category-overlay"></div>
+      <div class="category-info"><h3>Dupattas</h3><span>Banarasi · Phulkari · Chikankari</span></div>
+    </div>
+    <div class="category-card" onclick="window.location='products.html?cat=stoles'" id="cat-stoles">
+      <img src="images/stole.png" alt="Stoles">
+      <div class="category-overlay"></div>
+      <div class="category-info"><h3>Stoles & Scarves</h3><span>Pashmina · Wool · Silk Blends</span></div>
+    </div>
+    <div class="category-card" onclick="window.location='products.html?cat=home-decor'" id="cat-home">
+      <img src="images/dhurrie_rug.png" alt="Home Décor">
+      <div class="category-overlay"></div>
+      <div class="category-info"><h3>Home Décor</h3><span>Rugs · Cushions · Table Runners</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="products-section">
+  <div class="section-header">
+    <div class="section-tag">Curated For You</div>
+    <h2>Featured Products</h2>
+    <p>Handpicked bestsellers and critically acclaimed weaves from across India.</p>
+  </div>
+  <div class="products-grid" id="featured-products"></div>
+  <div style="text-align:center;margin-top:2.5rem">
+    <button class="btn-outline" onclick="window.location='products.html'" style="padding:13px 36px;border-color:var(--deep-maroon);color:var(--deep-maroon)" id="view-all-featured-btn">View All Products →</button>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  <div class="promo-content">
+    <div class="promo-tag">✦ Limited Time Offer</div>
+    <h2>Up to 40% Off on Silk Sarees This Festive Week</h2>
+    <p>Celebrate traditions with India's finest Kanjivaram, Banarasi and Chanderi silk sarees at unbelievable prices.</p>
+    <button class="btn-primary" onclick="window.location='products.html?cat=sarees'" id="promo-shop-btn" style="padding:13px 30px">Shop Sarees →</button>
+  </div>
+  <div style="font-size:8rem;opacity:0.2;position:relative;z-index:1">🪡</div>
+</div>
+
+<!-- NEW ARRIVALS -->
+<section class="products-section cream-bg" style="margin-top:3rem">
+  <div class="section-header">
+    <div class="section-tag">Just In</div>
+    <h2>New Arrivals</h2>
+    <p>Fresh from the loom — the latest additions to our handwoven collection.</p>
+  </div>
+  <div class="products-grid" id="new-arrivals"></div>
+</section>
+
+<!-- WEAVER STORY -->
+<section class="weaver-section" id="weaver-section">
+  <div class="weaver-img">
+    <img src="images/cushion_cover.png" alt="Handloom weaving">
+    <div class="weaver-img-badge">
+      <strong>Since 2018</strong>
+      Supporting 500+ Weaver Families
+    </div>
+  </div>
+  <div class="weaver-content">
+    <div class="weaver-label">Our Story</div>
+    <h2>Every Thread Carries a Weaver's Legacy</h2>
+    <p>Tantushala was born from a simple belief: that the ancient art of handloom weaving deserves to thrive in the modern world. We work directly with master weavers across India — from the silk workshops of Kanchipuram to the carpet villages of Mirzapur.</p>
+    <p>By eliminating middlemen, we ensure that artisans receive fair wages and complete creative freedom, while you receive genuinely authentic textiles at transparent prices.</p>
+    <p>Each product comes with a <strong style="color:var(--deep-maroon)">Weaver Certificate</strong> — telling you the name of the artisan who made it, their village, and the tradition behind the craft.</p>
+    <button class="btn-primary" onclick="window.location='products.html'" id="story-shop-btn" style="margin-top:0.5rem">Shop Responsibly →</button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--gold)">Customer Love</div>
+    <h2>What Our Customers Say</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-text">The Kanjivaram saree I bought was absolutely breathtaking. The quality is unlike anything I've found online before — you can literally feel the silk's richness. Will definitely be a loyal customer!</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">P</div>
+        <div><div class="author-name">Priya Krishnaswamy</div><div class="author-loc">⭐⭐⭐⭐⭐ · Chennai</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-text">I gifted a Banarasi dupatta to my mother and she was moved to tears. The craftsmanship is extraordinary. Tantushala's packaging and the Weaver Certificate made it feel even more special.</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div><div class="author-name">Rohan Mehta</div><div class="author-loc">⭐⭐⭐⭐⭐ · Mumbai</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-text">The dhurrie rug completely transformed my living room. The colours are vibrant and the weave is incredibly tight. Shipping was fast and it arrived beautifully packed. Highly recommend!</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div><div class="author-name">Anjali Sharma</div><div class="author-loc">⭐⭐⭐⭐⭐ · Delhi</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="section-tag">Stay Connected</div>
+  <h2>Join the Handloom Community</h2>
+  <p>Get weaving stories, exclusive offers and new collection launches — straight to your inbox.</p>
+  <form class="newsletter-form" id="newsletter-form">
+    <input type="email" placeholder="Your email address" required id="newsletter-email">
+    <button type="submit" id="newsletter-submit-btn">Subscribe</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">🪡 Tantushala</div>
+      <p class="footer-about">India's premium destination for authentic handloom textiles. Supporting artisan weavers since 2018.</p>
+      <div class="footer-social">
+        <div class="social-link">📘</div>
+        <div class="social-link">📸</div>
+        <div class="social-link">🐦</div>
+        <div class="social-link">▶️</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="products.html">All Products</a></li>
+        <li><a href="products.html?cat=sarees">Sarees</a></li>
+        <li><a href="products.html?cat=dupattas">Dupattas</a></li>
+        <li><a href="products.html?cat=stoles">Stoles</a></li>
+        <li><a href="products.html?cat=home-decor">Home Décor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns Policy</a></li>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Care Instructions</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Meet the Weavers</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Press & Media</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Tantushala. All rights reserved. | Celebrating India's Handloom Heritage 🇮🇳</p>
+  </div>
+</footer>
+
+<style>
+@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+</style>
+<script src="app.js"></script>
+</body>
+</html>
