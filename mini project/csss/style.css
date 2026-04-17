@@ -1,0 +1,216 @@
+/* =========================
+   RESET & VARIABLES
+========================= */
+:root{
+  --bg-main:#07010f;
+  --bg-glass:rgba(255,255,255,0.12);
+  --accent:#bb4eab;
+  --accent-soft:rgba(163, 151, 164, 0.35);
+  --text-main:#ffffff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body{
+  background:
+    radial-gradient(circle at top, #1b0f2f, var(--bg-main) 70%);
+  color:var(--text-main);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* =========================
+   STAR BACKGROUND
+========================= */
+.space-stars{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(1px 1px at 15% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 35% 80%, #fff, transparent),
+    radial-gradient(2px 2px at 60% 40%, #fff, transparent),
+    radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+    radial-gradient(2px 2px at 90% 70%, #fff, transparent);
+  opacity:.5;
+  animation:stars 10s ease-in-out infinite alternate;
+  z-index:-2;
+}
+
+@keyframes stars{
+  from{opacity:.3}
+  to{opacity:.6}
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1200px;
+  position:relative;
+}
+
+
+/* GLASS CARD */
+.hero-content{
+  background:var(--bg-glass);
+  padding:60px 70px;
+  border-radius:26px;
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.45),
+    inset 0 0 20px rgba(255,255,255,.12);
+  text-align:center;
+  transform-style:preserve-3d;
+  transition:.6s ease;
+}
+
+.hero-content:hover{
+  transform:rotateX(0deg) rotateY(0deg) scale(1.04);
+}
+
+/* TEXT */
+.hero h1{
+  font-size:3rem;
+  margin-bottom:14px;
+  text-shadow:0 10px 30px var(--accent-soft);
+}
+
+.hero p{
+  font-size:1.15rem;
+  opacity:.9;
+  margin-bottom:35px;
+}
+
+/* BUTTONS */
+.hero-buttons a{
+  display:inline-block;
+  padding:14px 34px;
+  margin:10px;
+  border-radius:40px;
+  font-weight:600;
+  color: #e660d2;
+  text-decoration:none;
+  transition:.3s ease;
+}
+
+.primary{
+  background:var(--accent);
+  color:#080008;
+}
+
+.secondary{
+  border:2px solid var(--accent);
+  color:#fff;
+}
+
+.hero-buttons a:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 35px rgba(0,0,0,.45);
+}
+
+/* =========================
+   STATS
+========================= */
+.stats{
+  max-width:1100px;
+  margin:80px auto;
+  padding:0 30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:25px;
+}
+
+.stat-card{
+  background:var(--bg-glass);
+  backdrop-filter:blur(14px);
+  padding:30px;
+  border-radius:18px;
+  text-align:center;
+  transition:.3s;
+}
+
+.stat-card:hover{
+  transform:translateY(-10px);
+}
+
+.stat-card h2{
+  font-size:2.2rem;
+  color:var(--accent);
+}
+
+/* =========================
+   GLASS SECTIONS
+========================= */
+.glass-section{
+  max-width:1100px;
+  margin:100px auto;
+  padding:60px;
+  background:var(--bg-glass);
+  backdrop-filter:blur(18px);
+  border-radius:26px;
+  text-align:center;
+}
+
+.glass-section h2{
+  font-size:2.4rem;
+  margin-bottom:35px;
+}
+
+/* STEPS */
+.steps{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+}
+
+.step{
+  background:rgba(255,255,255,.15);
+  padding:22px 30px;
+  border-radius:14px;
+}
+
+/* BLOOD GROUPS */
+.blood-groups span{
+  display:inline-block;
+  margin:10px;
+  padding:16px 20px;
+  border-radius:50%;
+  background:var(--accent);
+  font-weight:bold;
+}
+
+/* =========================
+   CTA
+========================= */
+.cta{
+  padding:90px 20px;
+  text-align:center;
+}
+
+.cta h2{
+  font-size:2.6rem;
+  margin-bottom:30px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+  text-align:center;
+  padding:30px;
+  opacity:.65;
+}
+

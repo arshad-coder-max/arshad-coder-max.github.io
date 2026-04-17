@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #1b0f2f, #07010f 70%);
+  color: white;
+  height: 100vh;
+}
+
+/* Stars */
+.space-stars {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 70% 60%, #fff, transparent),
+    radial-gradient(2px 2px at 40% 80%, #fff, transparent);
+  opacity: 0.5;
+  animation: twinkle 6s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; }
+  to { opacity: 0.7; }
+}
+
+/* Auth Box */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-card {
+  background: rgba(255,255,255,0.12);
+  padding: 40px;
+  width: 320px;
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  text-align: center;
+  transform: perspective(1000px) rotateX(6deg);
+  transition: 0.5s;
+}
+
+.auth-card:hover {
+  transform: perspective(1000px) rotateX(0deg) scale(1.05);
+}
+
+.auth-card h2 {
+  margin-bottom: 25px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 25px;
+  border: none;
+  font-weight: bold;
+  background: #f5aee0;
+  cursor: pointer;
+}
+
+.auth-card a {
+  color: #f5aee0;
+  text-decoration: none;
+}

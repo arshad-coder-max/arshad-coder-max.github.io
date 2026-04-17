@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Donor</title>
+  <link rel="stylesheet" href="search.css">
+</head>
+<body>
+
+<div class="space-stars"></div>
+
+<section class="search-section">
+  <h2>Find Blood Donor</h2>
+
+ <form method="GET" action="search.php">
+
+<select name="blood_group" required>
+  <option value="">Blood Group</option>
+  <option value="A+">A+</option>
+  <option value="B+">B+</option>
+  <option value="O+">O+</option>
+  <option value="AB+">AB+</option> 
+  <option value="A-">A-</option> 
+  <option value="B-">B-</option>
+  <option value="o-">O-</option>
+  <option value="AB-">AB-</option>
+</select>
+
+
+<input type="text" name="city" placeholder="City" required>
+
+<button type="submit">Search</button>
+
+</form>
+
+  </section>
+
+</body>
+</html>
