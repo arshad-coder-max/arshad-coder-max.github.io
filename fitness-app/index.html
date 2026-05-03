@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Fitness | Premium Tracker</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- React and ReactDOM via CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Babel for JSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    
+    <!-- React Root -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- Mock Data --- 
+    const defaultWorkouts = [
+        { id: 1, title: 'Upper Body Power', type: 'Strength', duration: 45, date: new Date().toISOString() },
+        { id: 2, title: 'Morning Run', type: 'Cardio', duration: 30, date: new Date(Date.now() - 86400000).toISOString() },
+        { id: 3, title: 'Evening Yoga', type: 'Flexibility', duration: 60, date: new Date(Date.now() - 3 * 86400000).toISOString() },
+        { id: 4, title: 'HIIT Circuit', type: 'Cardio', duration: 25, date: new Date(Date.now() - 4 * 86400000).toISOString() }
+    ];
+
+    const exerciseDatabase = [
+        { id: 1, name: "Barbell Deadlift", muscle: "Back", type: "Strength", diff: "Advanced" },
+        { id: 2, name: "Pushups", muscle: "Chest", type: "Strength", diff: "Beginner" },
+        { id: 3, name: "Treadmill Sprint", muscle: "Legs", type: "Cardio", diff: "Intermediate" },
+        { id: 4, name: "Pull-ups", muscle: "Back", type: "Strength", diff: "Intermediate" },
+        { id: 5, name: "Downward Dog", muscle: "Full Body", type: "Flexibility", diff: "Beginner" },
+        { id: 6, name: "Squats", muscle: "Legs", type: "Strength", diff: "Beginner" }
+    ];
+
+    // --- App Main Component ---
+    function App() {
+        const [currentView, setCurrentView] = useState('dashboard');
+        const [workouts, setWorkouts] = useState(() => {
+            const saved = localStorage.getItem('aura_workouts_v2');
+            if (saved) {
+                try { return JSON.parse(saved); } catch (e) {}
+            }
+            // fallback to older version
+            const legacy = localStorage.getItem('aura_workouts');
+            if(legacy) { try { return JSON.parse(legacy); } catch(e){} }
+            return defaultWorkouts;
+        });
+
+        // Sync with browser storage
+        useEffect(() => {
+            localStorage.setItem('aura_workouts_v2', JSON.stringify(workouts));
+        }, [workouts]);
+
+        const addWorkout = (workout) => {
+            setWorkouts([{ ...workout, id: Date.now(), date: new Date().toISOString() }, ...workouts]);
+            setCurrentView('dashboard');
+        };
+
+        const deleteWorkout = (id) => {
+            setWorkouts(workouts.filter(w => w.id !== id));
+        };
+
+        // Header Navigation
+        return (
+            <div className="animate-fade-in">
+                <header className="glass-panel" style={{ padding: '1rem 2rem', marginBottom: '2rem' }}>
+                    <div className="logo">
+                        <i className="fa-solid fa-bolt"></i> Aura Fitness
+                    </div>
+                    <nav>
+                        <button className={currentView === 'dashboard' ? 'active' : ''} onClick={() => setCurrentView('dashboard')}>
+                            Dashboard
+                        </button>
+                        <button className={currentView === 'library' ? 'active' : ''} onClick={() => setCurrentView('library')}>
+                            Library
+                        </button>
+                        <button className={currentView === 'add' ? 'active' : ''} onClick={() => setCurrentView('add')}>
+                            + New Workout
+                        </button>
+                        <button className={currentView === 'history' ? 'active' : ''} onClick={() => setCurrentView('history')}>
+                            History
+                        </button>
+                    </nav>
+                </header>
+
+                <main>
+                    {currentView === 'dashboard' && <Dashboard workouts={workouts} onDelete={deleteWorkout} />}
+                    {currentView === 'library' && <ExerciseLibrary />}
+                    {currentView === 'add' && <AddWorkoutForm onAdd={addWorkout} />}
+                    {currentView === 'history' && <WorkoutHistory workouts={workouts} onDelete={deleteWorkout} />}
+                </main>
+            </div>
+        );
+    }
+
+    // --- 1. Dashboard View with Chart.js ---
+    function Dashboard({ workouts, onDelete }) {
+        const chartRef = useRef(null);
+        let chartInstance = null;
+
+        // Statistics
+        const totalWorkouts = workouts.length;
+        const totalMinutes = workouts.reduce((acc, curr) => acc + parseInt(curr.duration || 0), 0);
+        
+        // Calculate minutes per day for the last 7 days
+        const last7Days = [];
+        const activityData = [0, 0, 0, 0, 0, 0, 0];
+        
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            last7Days.push(d.toLocaleDateString(undefined, { weekday: 'short' }));
+            
+            // Sum durations for this day
+            const dString = d.toDateString();
+            const daySum = workouts.reduce((sum, w) => {
+                if(new Date(w.date).toDateString() === dString) {
+                    return sum + parseInt(w.duration || 0);
+                }
+                return sum;
+            }, 0);
+            activityData[6-i] = daySum;
+        }
+
+        const thisWeek = activityData.reduce((a,b)=>a+b, 0);
+
+        // Chart.js render
+        useEffect(() => {
+            if (chartRef.current) {
+                const ctx = chartRef.current.getContext('2d');
+                chartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: last7Days,
+                        datasets: [{
+                            label: 'Active Minutes',
+                            data: activityData,
+                            backgroundColor: 'rgba(0, 210, 255, 0.4)',
+                            borderColor: '#00d2ff',
+                            borderWidth: 2,
+                            borderRadius: 6,
+                            hoverBackgroundColor: 'rgba(138, 43, 226, 0.6)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)' } },
+                            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)' } }
+                        }
+                    }
+                });
+            }
+            return () => { if(chartInstance) chartInstance.destroy(); }
+        }, [workouts]);
+
+        // Goal Logic (e.g., 200 mins a week)
+        const weeklyGoal = 200;
+        const goalPercent = Math.min((thisWeek / weeklyGoal) * 100, 100);
+
+        return (
+            <div className="animate-fade-in">
+                <div className="dashboard-grid">
+                    <div className="glass-panel stat-card">
+                        <div className="stat-icon primary">
+                            <i className="fa-solid fa-fire"></i>
+                        </div>
+                        <div className="stat-details">
+                            <h3>Total Workouts</h3>
+                            <p>{totalWorkouts}</p>
+                        </div>
+                    </div>
+                    
+                    <div className="glass-panel stat-card">
+                        <div className="stat-icon secondary">
+                            <i className="fa-solid fa-stopwatch"></i>
+                        </div>
+                        <div className="stat-details">
+                            <h3>Lifetime Active Mins</h3>
+                            <p>{totalMinutes}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="dashboard-details-grid">
+                    <div className="glass-panel">
+                        <h2 style={{ marginBottom: '1rem', fontSize: '1.2rem' }}>7 Day Activity Profile</h2>
+                        <div className="chart-container">
+                            <canvas ref={chartRef}></canvas>
+                        </div>
+                    </div>
+                    
+                    <div className="glass-panel">
+                        <h2 style={{ marginBottom: '2rem', fontSize: '1.2rem', textAlign: 'center' }}>Weekly Goal Progress</h2>
+                        <div className="progress-container">
+                            <div className="progress-circle" style={{ '--progress': `${goalPercent}%` }}>
+                                <div className="progress-circle-inner">
+                                    <p>{thisWeek}</p>
+                                    <span>/ {weeklyGoal} mins</span>
+                                </div>
+                            </div>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                                {goalPercent >= 100 ? "Goal Crushed! 🎉" : `${weeklyGoal - thisWeek} mins to go!`}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="glass-panel" style={{ marginTop: '1.5rem' }}>
+                    <h2 style={{ marginBottom: '1rem', fontSize: '1.2rem' }}>Recent Activity</h2>
+                    {workouts.length === 0 ? (
+                        <div className="empty-state">
+                            <p>No workouts logged yet.</p>
+                        </div>
+                    ) : (
+                        <div className="workout-list">
+                            {workouts.slice(0, 3).map(w => (
+                                <WorkoutItem key={w.id} workout={w} onDelete={onDelete} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
+    // --- 2. Exercise Library View ---
+    function ExerciseLibrary() {
+        const [filter, setFilter] = useState('');
+
+        const filtered = exerciseDatabase.filter(e => 
+            e.name.toLowerCase().includes(filter.toLowerCase()) || 
+            e.muscle.toLowerCase().includes(filter.toLowerCase())
+        );
+
+        return (
+            <div className="glass-panel animate-fade-in">
+                <div className="library-header">
+                    <h2><i className="fa-solid fa-book-open" style={{marginRight: '10px', color: 'var(--accent-secondary)'}}></i> Exercise Arsenal</h2>
+                    <div className="search-bar">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <input 
+                            type="text" 
+                            placeholder="Search exercise or muscle..." 
+                            value={filter}
+                            onChange={(e) => setFilter(e.target.value)}
+                        />
+                    </div>
+                </div>
+                
+                <div className="library-grid">
+                    {filtered.map(ex => (
+                        <div key={ex.id} className="exercise-card">
+                            <div className="exercise-img-placeholder">
+                                <i className="fa-solid fa-dumbbell"></i>
+                            </div>
+                            <h3>{ex.name}</h3>
+                            <div className="exercise-tags">
+                                <span className="exercise-tag muscle">{ex.muscle}</span>
+                                <span className="exercise-tag">{ex.type}</span>
+                                <span className="exercise-tag" style={{borderColor: '#ff4b2b', color: '#ff4b2b'}}>{ex.diff}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    // --- 3. Complex Add Workout Form ---
+    function AddWorkoutForm({ onAdd }) {
+        const [title, setTitle] = useState('');
+        const [type, setType] = useState('Strength');
+        const [duration, setDuration] = useState('');
+        const [sets, setSets] = useState([{ reps: '', weight: '' }]);
+
+        const handleAddSet = () => setSets([...sets, { reps: '', weight: '' }]);
+        
+        const updateSet = (index, field, value) => {
+            const newSets = [...sets];
+            newSets[index][field] = value;
+            setSets(newSets);
+        };
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            if (!title || !duration) return;
+            onAdd({ title, type, duration: parseInt(duration), sets });
+        };
+
+        return (
+            <div className="glass-panel animate-fade-in" style={{ maxWidth: '600px', margin: '0 auto' }}>
+                <h2 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Log Comprehensive Workout</h2>
+                
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label>Workout Title</label>
+                        <input type="text" placeholder="e.g. Heavy Leg Day" value={title} onChange={e => setTitle(e.target.value)} required />
+                    </div>
+                    
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label>Primary Type</label>
+                            <select value={type} onChange={e => setType(e.target.value)}>
+                                <option value="Strength">Strength</option>
+                                <option value="Cardio">Cardio</option>
+                                <option value="Flexibility">Flexibility</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Duration (Mins)</label>
+                            <input type="number" placeholder="45" value={duration} onChange={e => setDuration(e.target.value)} required />
+                        </div>
+                    </div>
+
+                    {/* Sets Logging Section (Only for strength) */}
+                    {type === 'Strength' && (
+                        <div style={{ background: 'rgba(0,0,0,0.15)', padding: '1rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
+                            <label style={{display: 'block', marginBottom: '1rem', color: 'var(--accent-secondary)'}}>Detailed Logging (Sets & Reps)</label>
+                            {sets.map((set, i) => (
+                                <div key={i} className="form-row" style={{marginBottom: '0.5rem'}}>
+                                    <input 
+                                        type="number" placeholder={`Set ${i+1} Reps`} 
+                                        value={set.reps} onChange={e => updateSet(i, 'reps', e.target.value)} 
+                                    />
+                                    <input 
+                                        type="number" placeholder="Weight (lbs)" 
+                                        value={set.weight} onChange={e => updateSet(i, 'weight', e.target.value)} 
+                                    />
+                                </div>
+                            ))}
+                            <button type="button" onClick={handleAddSet} className="add-set-btn">
+                                + Add Another Set
+                            </button>
+                        </div>
+                    )}
+                    
+                    <button type="submit" className="btn-primary">
+                        <i className="fa-solid fa-plus"></i> Save to System
+                    </button>
+                </form>
+            </div>
+        );
+    }
+
+    // --- 4. History View ---
+    function WorkoutHistory({ workouts, onDelete }) {
+        return (
+            <div className="glass-panel animate-fade-in">
+                <h2 style={{ marginBottom: '1.5rem' }}>Complete Archive</h2>
+                {workouts.length === 0 ? (
+                    <div className="empty-state">
+                        <p>Your history is fully empty.</p>
+                    </div>
+                ) : (
+                    <div className="workout-list">
+                        {workouts.map(w => <WorkoutItem key={w.id} workout={w} onDelete={onDelete} />)}
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    // --- Helper Component ---
+    function WorkoutItem({ workout, onDelete }) {
+        const dateStr = new Date(workout.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
+        const isStrength = workout.type === 'Strength';
+
+        return (
+            <div className="workout-item">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div className={`stat-icon ${workout.type === 'Cardio' ? 'secondary' : 'primary'}`} style={{ width: '50px', height: '50px' }}>
+                        <i className={`fa-solid ${workout.type === 'Cardio' ? 'fa-person-running' : workout.type === 'Flexibility' ? 'fa-person-praying' : 'fa-dumbbell'}`}></i>
+                    </div>
+                    <div className="workout-info">
+                        <h4>{workout.title}</h4>
+                        <p>{dateStr}</p>
+                    </div>
+                </div>
+                
+                <div className="workout-meta">
+                    {/* Display sets if available */}
+                    {isStrength && workout.sets && workout.sets.length > 0 && workout.sets[0].reps && (
+                        <div className="meta-badge" style={{background: 'rgba(138,43,226,0.1)', color: 'var(--accent-primary)'}}>
+                            {workout.sets.length} Sets
+                        </div>
+                    )}
+                    <div className="meta-badge">
+                        <i className="fa-regular fa-clock"></i> {workout.duration} min
+                    </div>
+                    <button className="delete-btn" onClick={() => onDelete(workout.id)} title="Delete Workout"><i className="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+        );
+    }
+
+    // Initialize System
+    const rootEngine = ReactDOM.createRoot(document.getElementById('root'));
+    rootEngine.render(<App />);
+
+    </script>
+</body>
+</html>
