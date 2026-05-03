@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart – Tantushala</title>
+<meta name="description" content="Review your handloom cart and proceed to secure checkout.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="cart">
+
+<nav class="navbar">
+  <div class="logo">🪡 <span>Tantu</span>shala</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Shop</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" style="position:relative" id="nav-cart-btn">
+      🛒 <span class="cart-badge"></span>
+    </button>
+    <button class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="products.html">Shop All</a>
+</div>
+
+<main class="cart-page">
+  <h1>Your Shopping Cart 🛒</h1>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-cart" id="cart-empty" style="display:none">
+    <div class="empty-icon">🛒</div>
+    <h3>Your cart is empty</h3>
+    <p>Looks like you haven't added any handloom treasures yet!</p>
+    <button class="btn-primary" onclick="window.location='products.html'" id="empty-shop-btn" style="padding:12px 30px">Explore Collection →</button>
+  </div>
+
+  <!-- CART CONTENT -->
+  <div class="cart-layout" id="cart-content">
+    <div>
+      <div class="cart-items" id="cart-items-container"></div>
+      <div style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem">
+        <a href="products.html" style="color:var(--saffron);font-weight:600;font-size:0.9rem" id="continue-shopping-link">← Continue Shopping</a>
+        <button onclick="clearCartAll()" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:0.85rem;text-decoration:underline" id="clear-cart-btn">Clear Cart</button>
+      </div>
+    </div>
+
+    <aside class="cart-summary">
+      <h3>Order Summary</h3>
+      <div class="coupon-row">
+        <input type="text" id="coupon-input" placeholder="Enter coupon code">
+        <button class="btn-primary" onclick="applyCoupon()" id="apply-coupon-btn" style="padding:10px 18px;border-radius:8px;white-space:nowrap">Apply</button>
+      </div>
+      <div class="summary-row"><span>Subtotal</span><span id="summary-subtotal">₹0</span></div>
+      <div class="summary-row"><span>Member Discount (5%)</span><span id="summary-discount" style="color:#27ae60">−₹0</span></div>
+      <div class="summary-row"><span>Shipping</span><span id="summary-shipping">₹199</span></div>
+      <div class="summary-row" style="font-size:0.78rem;color:var(--teal)"><span colspan="2">✔ Free shipping on orders above ₹5000</span></div>
+      <div class="summary-row total"><span>Total</span><span id="summary-total">₹0</span></div>
+      <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem;text-align:center">
+        Inclusive of all taxes • Prices in INR
+      </div>
+      <button class="checkout-btn" onclick="window.location='checkout.html'" id="proceed-checkout-btn">Proceed to Checkout →</button>
+      <div style="display:flex;justify-content:center;gap:1rem;margin-top:1.2rem;font-size:0.8rem;color:var(--text-muted)">
+        <span>🔒 SSL Secure</span>
+        <span>💳 UPI / Cards</span>
+        <span>🔄 Easy Returns</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- YOU MAY ALSO LIKE -->
+  <div style="margin-top:4rem">
+    <div class="section-header" style="text-align:left;margin-bottom:2rem">
+      <div class="section-tag">Keep Exploring</div>
+      <h2>You May Also Like</h2>
+    </div>
+    <div class="products-grid" id="cart-suggestions"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-logo">🪡 Tantushala</div><p class="footer-about">India's premium destination for authentic handloom textiles.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="products.html">All Products</a></li><li><a href="products.html?cat=sarees">Sarees</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Shipping Info</a></li><li><a href="#">Returns</a></li></ul></div>
+    <div class="footer-col"><h4>About</h4><ul><li><a href="#">Our Story</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2024 Tantushala. All rights reserved. 🇮🇳</p></div>
+</footer>
+
+<style>@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }</style>
+<script src="app.js"></script>
+<script>
+function clearCartAll() {
+  if (confirm('Clear all items from cart?')) {
+    cart = []; saveCart(); renderCart();
+  }
+}
+function applyCoupon() {
+  const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+  if (code === 'HANDLOOM10') showToast('🎉 Coupon applied! 10% extra off.');
+  else showToast('❌ Invalid coupon code.');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const sugg = document.getElementById('cart-suggestions');
+  if (sugg) sugg.innerHTML = PRODUCTS.slice(0, 4).map(renderProductCard).join('');
+});
+</script>
+</body>
+</html>
