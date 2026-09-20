@@ -129,6 +129,10 @@ I'm interested in opportunities related to:
 * Web Application Testing
 * SQL/Database Testing
 * Test Automation
+  
+ 📈 GitHub Stats
+
+![Arshh's GitHub Stats](https://github-readme-stats.vercel.app/api?username=arshad-coder-max&show_icons=true)
 
  📫 Connect With Me
 
@@ -139,4 +143,4 @@ I'm interested in opportunities related to:
 
 I believe good software isn't just about building features — it's also about making sure those features work reliably.
 
-  #Build. Test. Improve. Repeat. 🚀**
+  #Build. Test. Improve. Repeat. 🚀
