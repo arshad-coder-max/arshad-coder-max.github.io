@@ -149,11 +149,11 @@ Interested in opportunities related to:
 
  💻 GitHub
 
-https://github.com/arshad-coder-max?utm_source=chatgpt.com
+https://github.com/arshad-coder-max/arshad-coder-max.github.io
 
  💼 LinkedIn
 
-https://www.linkedin.com/in/mohammed-arshad-b9156a320?utm_source=chatgpt.com
+www.linkedin.com/in/mohammed-arshad-b9156a320
 
  📫 Let's Connect
 
