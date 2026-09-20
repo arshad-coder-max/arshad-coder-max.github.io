@@ -1,146 +1,166 @@
-👋 Hi, I'm Arshad
+#👋 Hi, I'm Arshh
 
-  Software Testing | Manual QA | MERN Full Stack | SQL
+ # Software Testing | QA | MERN Full Stack | SQL
 
-I'm a **BSc Computer Science graduate** with a background in **MERN Full Stack Development and Data Analytics**, currently focusing on **Software Testing and Quality Assurance**.
+BSc Computer Science graduate focused on **Software Testing and Quality Assurance**, with a background in **MERN Full Stack Development** and **Data Analytics**.
+Currently pursuing a **6-month Software Testing course** and building practical knowledge in manual testing, test case design, defect reporting, SDLC, STLC, Agile/Scrum, web testing, and database testing.
 
-I enjoy building web applications, understanding how software works, and finding issues that can improve the overall quality and user experience.
+🧪 What I'm Currently Learning
 
-
- 🧪 Current Focus
-
-* Manual Software Testing
-* Software Testing Life Cycle (STLC)
-* Software Development Life Cycle (SDLC)
-* Test Case Design
-* Test Scenarios & Test Data
-* Functional Testing
-* Non-Functional Testing
-* Smoke & Sanity Testing
-* Regression Testing
-* Bug Reporting & Bug Life Cycle
-* Severity & Priority
-* Agile & Scrum
-* SQL Testing
+  * 🔍 Manual Software Testing
+  * 📝 Test Case & Test Scenario Design
+  * 🐞 Bug Reporting & Defect Management
+  * 🔄 SDLC & STLC
+  * 🚀 Agile & Scrum
+  * 🌐 Web Application Testing
+  * 🗄️ SQL & Database Testing
+  * 🔁 Regression Testing
+  * ✅ Smoke & Sanity Testing
+  * 🧩 Functional & Non-Functional Testing
+  * ⚫ Black Box Testing
+  * ⚪ White Box Testing
+  * ◻️ Grey Box Testing
 
 🛠️ Technical Skills
 
  🧪 Software Testing
 
-* Manual Testing
-* Functional Testing
-* Regression Testing
-* Smoke Testing
-* Sanity Testing
-* Test Case Design
-* Bug Reporting
-* SDLC & STLC
-* Agile & Scrum
+`Manual Testing` `Test Cases` `Test Scenarios` `Bug Reporting` `SDLC` `STLC` `Agile` `Scrum` `Functional Testing` `Regression Testing`
 
- 💻 Development
+ 💻 Frontend & Web Development
 
-* HTML
-* CSS
-* JavaScript
-* React
-* MERN Stack
-* PHP
+`HTML` `CSS` `JavaScript` `React` `MERN` `PHP`
 
  🗄️ Database
 
-* SQL
-* MySQL
-* Oracle SQL
+`SQL` `MySQL` `Oracle SQL` `Oracle SQL Developer`
+
+ 🐍 Programming
+
+`Python` `Java` `JavaScript`
 
  🔧 Tools & Technologies
 
-* Git
-* GitHub
-* VS Code
-* XAMPP
-* Oracle SQL Developer
+`Git` `GitHub` `VS Code` `XAMPP`
 
- 📊 Data
-
-* Data Analytics
-* Python
-
-📂 Featured Projects
+ 📌 Featured Projects
 
  🩸 Blood Donor Management System
 
-A web-based application designed to connect blood donors with people searching for blood during emergencies.
+**Technologies:** `PHP` `HTML` `CSS` `MySQL`
 
-**Key Features:**
+A web-based application designed to help connect blood donors with people searching for blood.
 
-* Donor registration
-* Blood group-based search
-* City/location-based search
-* Donor availability
-* Donor information management
+**Features:**
 
-**Technologies:** PHP, HTML, CSS, MySQL
+* 👤 Donor registration
+* 🩸 Blood group-based search
+* 📍 City/location-based search
+* ✅ Donor availability
+* 🗄️ Donor information management
+* 🔎 Search and filtering functionality
 
- 🤝 Mini Freelancer Marketplace
+**Testing perspective:**
 
-A web application project based on a freelancer marketplace concept.
+* Functional testing
+* Form validation testing
+* Database testing
+* Search functionality testing
+* Boundary and negative testing
+
+ 💼 Mini Freelancer Marketplace
+
+**Technologies:** `Web Development` `JavaScript` `Frontend`
+
+A marketplace-style project designed around connecting freelancers with users looking for services.
 
 **Focus:**
 
-* User-friendly interface
-* Web application functionality
-* Frontend development
-* Application testing
+* User interface
+* Service browsing
+* Interactive frontend functionality
+* Usability
 
  🎨 Color Palette Generator
 
-A React-based web application for generating and working with color palettes.
+**Technologies:** `React` `JavaScript` `HTML` `CSS`
 
- Technologies: React, JavaScript, HTML, CSS
+An interactive frontend project for generating and exploring color palettes.
 
+**Focus:**
+
+* React components
+* User interaction
+* Dynamic UI updates
+* Frontend functionality
+  
  🧪 Testing Portfolio
 
-I'm currently building practical Software Testing projects covering:
+I'm building practical testing experience by applying software testing concepts to web applications.
 
-* Test Case Creation
-* Test Scenario Identification
-* Test Data Preparation
-* Test Execution
-* Bug Identification
-* Bug Reports
-* Severity & Priority Classification
-* Regression Testing
-* Functional Testing
+ Testing Areas
 
- 📜 Certifications & Courses
+| Area                   | Concepts                                                      |
+| ---------------------- | ------------------------------------------------------------- |
+| 📋 Test Documentation  | Test Plan, Test Strategy, Test Scenario, Test Case, Test Data |
+| 🔍 Testing Types       | Functional, Non-Functional, Regression, Smoke, Sanity         |
+| 🐞 Defect Management   | Bug Reporting, Severity, Priority, Bug Life Cycle             |
+| 🔄 Development Process | SDLC, STLC, Agile, Scrum                                      |
+| 🧩 Test Design         | Positive Testing, Negative Testing, Boundary Testing          |
+| 🗄️ Database            | SQL Queries, Data Validation, Database Testing                |
+| 🌐 Web Testing         | UI, Forms, Navigation, Validation, Compatibility              |
 
-* 🎓 BSc Computer Science
-* 💻 MERN Full Stack Development — Completed
-* 📊 Data Analytics — Completed
-* 🧪 Software Testing — Currently Pursuing
+ 📚 Education & Courses
+
+ 🎓 BSc Computer Science
+
+Completed
+
+ 💻 MERN Full Stack Development
+
+Completed
+
+ 📊 Data Analytics
+
+Completed
+
+ 🧪 Software Testing
+
+Currently pursuing — 6-month course
 
  🎯 Career Interests
 
-I'm interested in opportunities related to:
+Interested in opportunities related to:
 
-* Software Testing
-* Quality Assurance
-* Manual Testing
-* Web Application Testing
-* SQL/Database Testing
-* Test Automation
-  
- 📈 GitHub Stats
+`Software Testing` • `QA Testing` • `Manual Testing` • `Web Application Testing` • `Database Testing` • `Frontend Development`
 
-![Arshh's GitHub Stats](https://github-readme-stats.vercel.app/api?username=arshad-coder-max&show_icons=true)
+ 🌱 Currently Improving
 
- 📫 Connect With Me
+* 🧪 Manual Testing
+* 📝 Test Documentation
+* 🐞 Defect Reporting
+* 🗄️ SQL & Database Testing
+* 🌐 Web Application Testing
+* 🔄 Agile/Scrum Practices
+* 💻 Git & GitHub
+* 🤖 Future Automation Testing
 
-* 💻 GitHub: [github.com/arshad-coder-max](https://github.com/arshad-coder-max)
-* 💼 LinkedIn: [linkedin.com/in/mohammed-arshad-b9156a320](https://www.linkedin.com/in/mohammed-arshad-b9156a320)
+🤝 Connect With Me
 
- ⚡ A little about me
+ 💻 GitHub
 
-I believe good software isn't just about building features — it's also about making sure those features work reliably.
+https://github.com/arshad-coder-max?utm_source=chatgpt.com
 
-  #Build. Test. Improve. Repeat. 🚀
+ 💼 LinkedIn
+
+https://www.linkedin.com/in/mohammed-arshad-b9156a320?utm_source=chatgpt.com
+
+ 📫 Let's Connect
+
+I'm interested in connecting with developers, testers, QA professionals, and people working in the software industry.
+
+Feel free to explore my repositories and projects.
+
+ 🚀 Learn • Build • Test • Improve
+
+> *Turning development knowledge into quality-focused software testing skills.*
